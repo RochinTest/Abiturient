@@ -15,10 +15,24 @@ public class Abiturient {
    private Double countRating;
 public String[][] abiturient = new String[8][17];
 public Double[][] exRating = new Double[2][17];
+    public Abiturient(String lastName, String firstName, String patronymic, String address, int i, int i1, double excellentRating) {
+    }
+
+    public Abiturient( String lastName, String firstName, String patronymic, String address, String telephone, String ratings, Double excellentRating) {
+
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.patronymic = patronymic;
+        this.address = address;
+        this.telephone = telephone;
+        this.ratings = ratings;
+        this.excellentRating = excellentRating;
+    }
+
     public Abiturient() {
     }
 
-     public Double getExRating() {
+    public Double getExRating() {
 
         excellentRating=(exRating[0][getId()]);
       return excellentRating;
@@ -97,6 +111,7 @@ public Double[][] exRating = new Double[2][17];
     public void setRatings(String ratings) {
         this.ratings = ratings;
     }
+
     public void initArray() {
         String fieldId = "0 ; 1 ; 2 ; 3 ; 4 ; 5 ; 6 ; 7 ; 8 ; 9 ; 10 ; 11 ; 12 ; 13 ; 14 ; 15 ; 16 ";
         String fieldLastName = "Сидоров ; Брундуков ; Верещако ; Голотовский ; Добринская  ; Жуковин  ; Зуева ; Иванченков ; Игнатович ; Казаченок ; Коверзюк ; Козак ; Кот ; Кочеткова ; Кривецкий ; Марчик ; Мирный ;";
