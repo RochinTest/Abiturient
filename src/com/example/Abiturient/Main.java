@@ -13,26 +13,16 @@ import java.util.*;
 
 public class Main {
 
-    private String[] str = new String[7];
-    String str1;
-
-
-    public Main() {
-    }
-
 
     public static void main(String[] args) {
-
         List<Abiturient> abiturients = makeAbiturient();
-
-
         makeAbiturient();
         // show1(abiturients);
         // counter(abiturients);
-       // averageRating(abiturients);
+        // averageRating(abiturients);
         // person.test(person1);
-        //excellentAbiturient(abiturients);
-        sortArray(abiturients);
+        excellentAbiturient(abiturients);
+       // sortArray(abiturients);
 
         // badRatings(abiturients);
         // person.show(person1);
@@ -95,16 +85,10 @@ public class Main {
         System.out.println("Введите средний бал");
         double n = inputDouble();
         DecimalFormat count = new DecimalFormat("#0.00");
-        double counter;
-        for (Abiturient abiturient : abiturients) {
-            counter = 0;
-            str = abiturient.getRatings().split(" +");
-            for (int i = 0; i < str.length; i++) {
-                counter = (counter + (Integer.parseInt(str[i])));
-            }
-            String exellens = count.format(counter / str.length);
 
-            if ((counter / str.length) > n) {
+        for (Abiturient abiturient : abiturients) {
+          Float counter= Float.valueOf(abiturient.getExcellentRating());
+            if ((counter/ str.length) > n) {
 
                 System.out.println(abiturient.getLastName() + " " + abiturient.getFirstName() + "  средний бал " + count.format(counter / str.length));
             }
@@ -112,15 +96,13 @@ public class Main {
     }
 
     private static void sortArray(List<Abiturient> abiturients) {
-        counter( abiturients);
+
         Comparator<Abiturient> comparator = Comparator.comparing(abiturient -> abiturient.getExcellentRating());
         Collections.sort(abiturients, Collections.reverseOrder(comparator));
-        for (Abiturient abiturient:abiturients) {
-            System.out.println(abiturient.getFirstName()+ " "+ abiturient.getLastName()+" "+ abiturient.getExcellentRating());
+        for (Abiturient abiturient : abiturients) {
+            System.out.println(abiturient.getFirstName() + " " + abiturient.getLastName() + " " + abiturient.getExcellentRating());
         }
-            }
-
-
+    }
 
 
     private static int inputInt() {
@@ -144,35 +126,20 @@ public class Main {
 
 
     private static void excellentAbiturient(List<Abiturient> abiturients) {
-        DecimalFormat count = new DecimalFormat("#0.00");
-        String st = "";
-        double n2 = 0;
         double n1;
-        String[] str = null;
-        double n = 0;
         int n3 = 0;
-        double counter = 0;
-        for (Abiturient abiturient : abiturients) {
-            counter = 0;
-            str = abiturient.getRatings().split(" +");
-            for (int i = 0; i < str.length; i++) {
-                counter = (counter + (Integer.parseInt(str[i])));
-            }
-            n1 = counter / str.length;
-            abiturient.setExcellentRating(""+n1);
-        }
-            System.out.print("проходной бал =  5,58");
-            System.out.println();
-            System.out.println("Введите кол-во студентов с балом больше проходного");
-            n3 = inputInt();
-            Comparator<Abiturient> comparator = Comparator.comparing(abiturient -> abiturient.getExcellentRating());
-            Collections.sort(abiturients, Collections.reverseOrder(comparator));
+        System.out.print("проходной бал =  5,58");
+        System.out.println();
+        System.out.println("Введите кол-во студентов с балом больше проходного");
+        n3 = inputInt();
+        Comparator<Abiturient> comparator = Comparator.comparing(abiturient -> abiturient.getExcellentRating());
+        Collections.sort(abiturients, Collections.reverseOrder(comparator));
 
-        for (Abiturient abiturient:abiturients ) {
-st=(abiturient.getExcellentRating());
-n1=Double.parseDouble(st);
-            //abiturient.setExcellentRating(count.format(n1));
-            if (n1 >= 5.58 && n3!=0) {
+        for (Abiturient abiturient : abiturients) {
+
+            n1 = Double.parseDouble(abiturient.getExcellentRating().replaceAll(",", "."));
+
+            if (n1 >= 5.58 && n3 != 0) {
                 n3--;
 
                 System.out.println(abiturient.getFirstName() + " " + abiturient.getExcellentRating());
@@ -181,9 +148,9 @@ n1=Double.parseDouble(st);
 
         n3 = 0;
         System.out.println("Осталось одно место с полупроходным балом 5.57, на которое претендуют ");
-        for (Abiturient abiturient:abiturients ) {
-            st=(abiturient.getExcellentRating());
-            n1=Double.parseDouble(st);
+        for (Abiturient abiturient : abiturients) {
+
+            n1 = Double.parseDouble(abiturient.getExcellentRating().replaceAll(",","."));
             //abiturient.setExcellentRating(count.format(n1));
             if (n1 <= 5.58 && n3 < 3) {
                 n3++;
@@ -193,22 +160,5 @@ n1=Double.parseDouble(st);
         }
     }
 
-    private static void counter(List<Abiturient> abiturients) {
-        DecimalFormat count = new DecimalFormat("# 0.00");
-        double counter = 0;
-        String[] str = null;
-        Abiturient str1 = null;
-        for (Abiturient abiturient : abiturients) {
-            counter = 0;
-            str = abiturient.getRatings().split(" +");
-            for (int i = 0; i < str.length; i++) {
-                counter = (counter + (Integer.parseInt(str[i])));
-            }
-            String exellens = count.format(counter / str.length);
-            abiturient.setExcellentRating(exellens);
-           // System.out.println(abiturient.getFirstName() + " " + abiturient.getExcellentRating());
 
-
-        }
-    }
 }

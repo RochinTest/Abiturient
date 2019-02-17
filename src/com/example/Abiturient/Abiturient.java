@@ -1,11 +1,12 @@
 package com.example.Abiturient;
 
 
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 public class Abiturient {
+    private static final DecimalFormat count = new DecimalFormat("# 0.00");
 
-    private int id;
     private String lastName;
     private String firstName;
     private String patronymic;
@@ -24,9 +25,8 @@ public class Abiturient {
         this.telephone = telephone;
         this.ratings = ratings;
         this.excellentRating = excellentRating;
+        counterExelens();
     }
-
-
 
 
     public String getLastName() {
@@ -67,23 +67,38 @@ public class Abiturient {
         if (!(o instanceof Abiturient)) return false;
         Abiturient abiturient = (Abiturient) o;
         return Objects.equals(getLastName(), abiturient.getLastName()) &&
-                Objects.equals(getFirstName(),abiturient.getFirstName()) &&
-                        Objects.equals(getPatronymic(), abiturient.getPatronymic())&&
-                        Objects.equals(getAddress(),abiturient.getAddress())&&
-                                Objects.equals(getTelephone(), abiturient.getTelephone())&&
-                                        Objects.equals(getRatings(), abiturient.getRatings())&&
-                                        Objects.equals(getExcellentRating(),abiturient.getExcellentRating());
+                Objects.equals(getFirstName(), abiturient.getFirstName()) &&
+                Objects.equals(getPatronymic(), abiturient.getPatronymic()) &&
+                Objects.equals(getAddress(), abiturient.getAddress()) &&
+                Objects.equals(getTelephone(), abiturient.getTelephone()) &&
+                Objects.equals(getRatings(), abiturient.getRatings()) &&
+                Objects.equals(getExcellentRating(), abiturient.getExcellentRating());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getLastName(), getFirstName(), getPatronymic(),getAddress(), getTelephone(), getRatings(), getExcellentRating());
+        return Objects.hash(getLastName(), getFirstName(), getPatronymic(), getAddress(), getTelephone(), getRatings(), getExcellentRating());
     }
-
 
 
     @Override
     public String toString() {
-        return "Студент " +lastName + " " +firstName+" " + excellentRating;
+        return "Студент " + lastName + " " + firstName + " " + excellentRating;
+    }
+
+    private void counterExelens() {
+
+        double counter = 0;
+        String[] str = null;
+        counter = 0;
+        str = getRatings().split(" +");
+        for (int i = 0; i < str.length; i++) {
+            counter = (counter + (Integer.parseInt(str[i])));
+        }
+        String exellens = count.format(counter / str.length);
+        setExcellentRating(exellens);
+
+
     }
 }
+
